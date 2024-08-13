@@ -1,0 +1,20 @@
+{
+    "name": "sobirjon/ap_bot",
+    "description": "advertising panel for the bot",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "ADPBot\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "sob1rdev",
+            "email": "20sobirjon05@gmail.com"
+        }
+    ],
+    "version": "1.0.0",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
