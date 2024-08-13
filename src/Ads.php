@@ -6,14 +6,17 @@ class Ads
 {
     private PDO $pdo;
 
-    public function __construct(){
-        $this->pdo=DB::connect();
+    public function __construct()
+    {
+        $this->pdo = DB::connect();
     }
 
-    public function create(string $ad){
-        $query = "INSERT INTO advertasing (ad, created_at) VALUES (:ad, NOW())";
+    public function create(string $title, string $content): bool
+    {
+        $query = "INSERT INTO advertasing (content, title, created_at) VALUES (:content, :title, NOW())";
         $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':ad', $ad);
+        $stmt->bindParam(':content', $content);
+        $stmt->bindParam(':title', $title);
 
         return $stmt->execute();
     }
@@ -28,17 +31,19 @@ class Ads
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-
-    public function update(int $id, string $ad){
-        $query = "UPDATE advertasing SET ad = :ad, updated_at = NOW() WHERE id = :id";
+    public function update(int $id, string $title, string $content)
+    {
+        $query = "UPDATE advertasing SET content = :content, title = :title, updated_at = NOW() WHERE id = :id";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':ad', $ad);
+        $stmt->bindParam(':content', $content);
+        $stmt->bindParam(':title', $title);
 
         return $stmt->execute();
     }
 
-    public function delete(int $id){
+    public function delete(int $id)
+    {
         $query = "DELETE FROM advertasing WHERE id = :id";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':id', $id);

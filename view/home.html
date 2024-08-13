@@ -12,7 +12,6 @@
     <header class="mb-4">
         <h1 class="text-center">Advertising Panel</h1>
     </header>
-
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="card">
@@ -20,7 +19,7 @@
                     <h2 class="card-title">Create New Advertisement</h2>
                 </div>
                 <div class="card-body">
-                    <form id="advertising-form" method="POST" action="process_advertising.php">
+                    <form id="advertising-form" method="POST" action="/routers/web.php">
                         <div class="mb-3">
                             <label for="ad_title" class="form-label">Advertisement Title:</label>
                             <input type="text" id="ad_title" name="ad_title" class="form-control" required>
@@ -28,10 +27,6 @@
                         <div class="mb-3">
                             <label for="ad_description" class="form-label">Advertisement Description:</label>
                             <textarea id="ad_description" name="ad_description" class="form-control" rows="4" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="ad_image" class="form-label">Advertisement Image URL:</label>
-                            <input type="url" id="ad_image" name="ad_image" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit Advertisement</button>
                     </form>

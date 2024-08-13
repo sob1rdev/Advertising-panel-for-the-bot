@@ -1,8 +1,5 @@
 <?php
-
 declare(strict_types=1);
-
-namespace ADPBot;
 
 use PDO;
 
@@ -10,21 +7,10 @@ class DB
 {
     public static function connect(): PDO
     {
-        $dsn = sprintf(
-            '%s:host=%s;dbname=%s',
-            $_ENV['DB_CONNECTION'],
-            $_ENV['DB_HOST'],
-            $_ENV['DB_NAME']
-        );
 
-        return new PDO(
-            $dsn,
-            $_ENV['DB_USERNAME'],
-            $_ENV['DB_PASSWORD'],
-            [
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            ]
-        );
+        $dsn = "{$_ENV['DB_CONNECTION']}:host={$_ENV['DB_HOST']};dbname={$_ENV['DB_NAME']}";
+        $username = $_ENV['DB_USERNAME'];
+        $password = $_ENV['DB_PASSWORD'];
+        return new PDO($dsn, $username, $password);
     }
 }
