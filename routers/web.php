@@ -1,15 +1,24 @@
 <?php
 
-require_once '../vendor/autoload.php'; // Autoloadingni to'g'ri yuklash
+declare(strict_types=1);
 
+use ADPBot\Router;
+use ADPBot\Bot;
 use ADPBot\Ads;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $title = trim($_POST['title']);
-    $content = trim($_POST['content']);
+$bot = new Bot($_ENV['TELEGRAM_BOT_TOKEN']);
+$task = new Ads();
+$users = $bot->getAll();
 
-    $ads = new Ads();
-    $ads->create($title, $content);
-    header('Location: /view/home.html');
-    exit();
-}
+Router::get('/', fn() => require 'view/home.php');
+Router::post('/text', callback: function () use ($task, $bot, $users) {
+    if (isset($_POST['content'])) {
+
+        $task->create($_POST['title'],$_POST['content']);
+
+        foreach ($users as $user) {
+            $bot->sendPost($user['chat_id'], $_POST['content']);
+        }
+        header('Location: /');
+    }
+});

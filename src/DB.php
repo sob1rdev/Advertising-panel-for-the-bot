@@ -1,16 +1,18 @@
 <?php
-declare(strict_types=1);
 
+namespace ADPBot;
 use PDO;
 
 class DB
 {
     public static function connect(): PDO
     {
-
         $dsn = "{$_ENV['DB_CONNECTION']}:host={$_ENV['DB_HOST']};dbname={$_ENV['DB_NAME']}";
         $username = $_ENV['DB_USERNAME'];
         $password = $_ENV['DB_PASSWORD'];
-        return new PDO($dsn, $username, $password);
+
+        return new PDO($dsn, $username, $password, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        ]);
     }
 }
